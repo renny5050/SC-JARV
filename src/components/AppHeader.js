@@ -49,8 +49,8 @@ const AppHeader = () => {
         </CHeaderToggler>
         <CHeaderNav className="d-none d-md-flex">
           <CNavItem>
-            <CNavLink to="/dashboard" as={NavLink}>
-              Dashboard
+            <CNavLink >
+              Centro de Edcucacion Inicial Juan Antonio Román Valecillos
             </CNavLink>
           </CNavItem>
         </CHeaderNav>
