@@ -50,7 +50,7 @@ const AppHeader = () => {
         <CHeaderNav className="d-none d-md-flex">
           <CNavItem>
             <CNavLink >
-              Centro de Edcucacion Inicial Juan Antonio Román Valecillos
+              Centro de Educación Inicial Juan Antonio Román Valecillos
             </CNavLink>
           </CNavItem>
         </CHeaderNav>
