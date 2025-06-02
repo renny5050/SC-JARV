@@ -15,6 +15,7 @@ import { AppSidebarNav } from './AppSidebarNav'
 
 // sidebar nav config
 import navigation from '../_nav'
+import logo from '../assets/images/Logo.png'
 
 const AppSidebar = () => {
   const dispatch = useDispatch()
@@ -24,7 +25,7 @@ const AppSidebar = () => {
   return (
     <CSidebar
       className="border-end"
-      colorScheme="dark"
+      colorScheme="light"
       position="fixed"
       unfoldable={unfoldable}
       visible={sidebarShow}
@@ -32,7 +33,16 @@ const AppSidebar = () => {
         dispatch({ type: 'set', sidebarShow: visible })
       }}
     >
-      <CSidebarHeader className="border-bottom">
+      <CSidebarHeader className="border-bottom d-flex align-items-center">
+        {/* Logo */}
+        <CSidebarBrand className="w-100 d-flex justify-content-center">
+          <img
+            src={logo}
+            alt="Logo"
+            height={100}
+            style={{ objectFit: 'contain' }}
+          />
+        </CSidebarBrand>
         <CCloseButton
           className="d-lg-none"
           dark
