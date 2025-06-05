@@ -14,15 +14,28 @@ import {
 
 const Estudiantes = () => {
   const [selectedStudent, setSelectedStudent] = useState({})
+  const [personasHogar, setPersonasHogar] = useState('') // Cambia a string
+  const [caracteristicasVivienda, setCaracteristicasVivienda] = useState('')
+  const [tenenciaVivienda, setTenenciaVivienda] = useState('')
 
   const handleChange = (e) => {
     setSelectedStudent({ ...selectedStudent, [e.target.name]: e.target.value })
   }
 
-  const handleSave = () => {
-    console.log('Datos guardados:', selectedStudent)
+  // Nuevo handler para selects
+  const handleSelectChange = (setter) => (e) => {
+    setter(e.target.value)
   }
 
+  const handleSave = () => {
+    const datosFinales = {
+      ...selectedStudent,
+      personas_hogar: personasHogar,
+      caracteristicas_vivienda: caracteristicasVivienda,
+      tenencia_vivienda: tenenciaVivienda,
+    }
+    console.log('Datos guardados:', datosFinales)
+  }
   return (
     <CCard>
       <CCardHeader>Formulario de Inscripción Año Escolar 2024-2025</CCardHeader>
@@ -129,11 +142,202 @@ const Estudiantes = () => {
             <CCol md={4}><CFormLabel>Teléfono</CFormLabel><CFormInput name="emergencia_telefono" value={selectedStudent["emergencia_telefono"] || ''} onChange={handleChange} /></CCol>
           </CRow>
           <CRow className="mb-4">
-  <CCol md={12}>
-    <CFormLabel>Dirección</CFormLabel>
-    <CFormInput name="emergencia_direccion" value={selectedStudent["emergencia_direccion"] || ''} onChange={handleChange} />
-  </CCol>
-</CRow>
+          <CCol md={12}>
+            <CFormLabel>Dirección</CFormLabel>
+            <CFormInput name="emergencia_direccion" value={selectedStudent["emergencia_direccion"] || ''} onChange={handleChange} />
+          </CCol>
+        </CRow>
+
+         <h6 className="mt-4">6. Ambiente socio-familiar</h6>
+      <CRow className="mb-3">
+        <CCol md={4}>
+          <CFormLabel>Personas que viven en el hogar</CFormLabel>
+          <CFormSelect
+            name="personas_hogar"
+            value={personasHogar}
+            onChange={handleSelectChange(setPersonasHogar)}
+            options={[
+              { label: 'Seleccione', value: '' },
+              { label: 'Niños', value: 'ninos' },
+              { label: 'Adultos', value: 'adultos' },
+              { label: 'Ambos', value: 'ambos' },
+            ]}
+          />
+        </CCol>
+        <CCol md={4}>
+          <CFormLabel>Características de la vivienda</CFormLabel>
+          <CFormSelect
+            name="caracteristicas_vivienda"
+            value={caracteristicasVivienda}
+            onChange={handleSelectChange(setCaracteristicasVivienda)}
+            options={[
+              { label: 'Seleccione', value: '' },
+              { label: 'Rancho', value: 'rancho' },
+              { label: 'Casa', value: 'casa' },
+              { label: 'Apto', value: 'apto' },
+              { label: 'Quinta', value: 'quinta' },
+              { label: 'Otro', value: 'otro' },
+            ]}
+          />
+        </CCol>
+        <CCol md={4}>
+          <CFormLabel>Tenencia de la vivienda</CFormLabel>
+          <CFormSelect
+            name="tenencia_vivienda"
+            value={tenenciaVivienda}
+            onChange={handleSelectChange(setTenenciaVivienda)}
+            options={[
+              { label: 'Seleccione', value: '' },
+              { label: 'Propia', value: 'propia' },
+              { label: 'Pagada', value: 'pagada' },
+              { label: 'Alquilada', value: 'alquilada' },
+              { label: 'Otro', value: 'otro' },
+            ]}
+          />
+        </CCol>
+      </CRow>
+
+        <h6 className="mt-4">7. Antecedentes prenatales</h6>
+      <CRow className="mb-3">
+        <CCol md={6}>
+          <CFormLabel>Enfermedades durante el embarazo</CFormLabel>
+          <CFormInput
+            name="enfermedades_embarazo"
+            value={selectedStudent.enfermedades_embarazo || ''}
+            onChange={handleChange}
+            placeholder="Describa si hubo enfermedades durante el embarazo"
+          />
+        </CCol>
+        <CCol md={6}>
+          <CFormLabel>Condiciones en el que se desarrolló el parto</CFormLabel>
+          <CFormInput
+            name="condiciones_parto"
+            value={selectedStudent.condiciones_parto || ''}
+            onChange={handleChange}
+            placeholder="Condiciones del parto"
+          />
+        </CCol>
+      </CRow>
+      <CRow className="mb-3">
+        <CCol md={4}>
+          <CFormLabel>Edad de la madre para el momento del parto</CFormLabel>
+          <CFormInput
+            name="edad_madre_parto"
+            value={selectedStudent.edad_madre_parto || ''}
+            onChange={handleChange}
+            placeholder="Edad de la madre"
+          />
+        </CCol>
+        <CCol md={4}>
+          <CFormLabel>Peso del niño(a) al nacer (kg)</CFormLabel>
+          <CFormInput
+            name="peso_nino_nacer"
+            value={selectedStudent.peso_nino_nacer || ''}
+            onChange={handleChange}
+            placeholder="Peso en kilogramos"
+          />
+        </CCol>
+        <CCol md={4}>
+          <CFormLabel>Talla del niño(a) al nacer (cm)</CFormLabel>
+          <CFormInput
+            name="talla_nino_nacer"
+            value={selectedStudent.talla_nino_nacer || ''}
+            onChange={handleChange}
+            placeholder="Talla en centímetros"
+          />
+        </CCol>
+      </CRow>
+
+      <h6 className="mt-4">8. Problemas que presentó al nacer</h6>
+      <CRow className="mb-3">
+        <CCol md={4}>
+          <CFormLabel>Edad en la que empezó a hablar</CFormLabel>
+          <CFormInput
+            name="edad_hablar"
+            value={selectedStudent.edad_hablar || ''}
+            onChange={handleChange}
+            placeholder="Edad en años"
+          />
+        </CCol>
+        <CCol md={4}>
+          <CFormLabel>Edad en la que empezó a caminar</CFormLabel>
+          <CFormInput
+            name="edad_caminar"
+            value={selectedStudent.edad_caminar || ''}
+            onChange={handleChange}
+            placeholder="Edad en años"
+          />
+        </CCol>
+        <CCol md={4}>
+          <CFormLabel>Mano que utiliza</CFormLabel>
+          <CFormSelect
+            name="mano_utiliza"
+            value={selectedStudent.mano_utiliza || ''}
+            onChange={handleChange}
+            options={[
+              { label: 'Seleccione', value: '' },
+              { label: 'Derecha', value: 'derecha' },
+              { label: 'Izquierda', value: 'izquierda' },
+            ]}
+          />
+        </CCol>
+      </CRow>
+      <CRow className="mb-3">
+        <CCol md={4}>
+          <CFormLabel>Salud</CFormLabel>
+          <CFormInput
+            name="salud"
+            value={selectedStudent.salud || ''}
+            onChange={handleChange}
+            placeholder="Describa el estado de salud"
+          />
+        </CCol>
+        <CCol md={4}>
+          <CFormLabel>Enfermedades padecidas</CFormLabel>
+          <CFormInput
+            name="enfermedades_padecidas"
+            value={selectedStudent.enfermedades_padecidas || ''}
+            onChange={handleChange}
+            placeholder="Indique enfermedades"
+          />
+        </CCol>
+        <CCol md={4}>
+          <CFormLabel>Tipo de Sangre</CFormLabel>
+          <CFormSelect
+            name="tipo_sangre"
+            value={selectedStudent.tipo_sangre || ''}
+            onChange={handleChange}
+            options={[
+              { label: 'Seleccione', value: '' },
+              { label: 'A+', value: 'A+' },
+              { label: 'A-', value: 'A-' },
+              { label: 'B+', value: 'B+' },
+              { label: 'B-', value: 'B-' },
+              { label: 'AB+', value: 'AB+' },
+              { label: 'AB-', value: 'AB-' },
+              { label: 'O+', value: 'O+' },
+              { label: 'O-', value: 'O-' },
+            ]}
+          />
+        </CCol>
+      </CRow>
+      <CRow className="mb-3">
+        <CCol md={4}>
+          <CFormLabel>Grupo sanguíneo</CFormLabel>
+          <CFormSelect
+            name="grupo_sanguineo"
+            value={selectedStudent.grupo_sanguineo || ''}
+            onChange={handleChange}
+            options={[
+              { label: 'Seleccione', value: '' },
+              { label: 'A', value: 'A' },
+              { label: 'B', value: 'B' },
+              { label: 'AB', value: 'AB' },
+              { label: 'O', value: 'O' },
+            ]}
+          />
+        </CCol>
+      </CRow>
 
           <CButton color="primary" onClick={handleSave}>Guardar</CButton>
         </CForm>
